@@ -35,19 +35,19 @@ optional arguments:
   
 NOTE: These examples use files in `example-files/`
 
-_Show help and exit_  
+_Show help and exit_   
 `./regex-tester.py -h`  
   
-_Show matching files_  
+_Show matching files_   
 `$ ./regex-tester.py ".+clean.csv" -w example-files -f`  
 
-_Show header names and anything missing using utf-8-sig encoding_  
+_Show header names and anything missing using utf-8-sig encoding_   
 `$ ./regex-tester.py ".+test-ca.csv" -e utf-8-sig -w example-files`  
 
-_Use a different delimiter_  
+_Use a different delimiter_    
 `$ ./regex-tester.py ".+clean.csv" -w example-files -d "|"`  
   
-_Show a table with header names and positions_
+_Show a table with header names and positions_  
 `./regex-tester.py ".+clean.csv" -w example-files -d "|" -t`  
   
 _Output a json object and pipe into jq_  
