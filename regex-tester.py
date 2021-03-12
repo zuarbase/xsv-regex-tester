@@ -84,10 +84,11 @@ def diff_regex_headers():
     # get headers from file and build list of all headers
     for matched_file in matching_filenames:
         first_line = head_n_1(os.path.join(working_dir, matched_file), encoding, delim)
-        header_dict = [{"value": x, "position": first_line.index(x)} for x in first_line]
-        for header in first_line:
+        header_dict = []
+        for index, header in enumerate(first_line):
             if header not in columns:
                 columns.append(header)
+            header_dict.append({"value": header, "position": index})
         headers[matched_file] = header_dict
     if do_json:
         print(json.dumps(headers))
