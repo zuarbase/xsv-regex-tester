@@ -33,12 +33,10 @@ optional arguments:
   
 ## Usage  
   
-NOTE: These examples use files in `example-files/`
-
 _Show help and exit_   
 `./regex-tester.py -h`  
   
-_Show matching files_   
+_Show matching files using working dir `example-files/`_   
 `$ ./regex-tester.py ".+clean.csv" -w example-files -f`  
 
 _Show header names and anything missing using utf-8-sig encoding_   
