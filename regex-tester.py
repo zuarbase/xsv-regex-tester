@@ -102,13 +102,15 @@ def diff_regex_headers():
             this_row = [colored_key]
             for column in columns:
                 found = False
+                matching_positions = ""
                 for val_pos in value:
                     if val_pos["value"] == column:
-                        this_row.append(val_pos["position"] + 1)
+                        matching_positions += str(val_pos["position"])+", "
                         found = True
                 if not found:
                     this_row.append(cs("0", "red"))
-
+                else:
+                    this_row.append(matching_positions[:-2])
             columnar_rows.append(this_row)
         try:
             table = columnar(columnar_rows, columnar_headers)
