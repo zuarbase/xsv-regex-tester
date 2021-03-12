@@ -46,7 +46,8 @@ def diff_regex_headers():
     do_table = args.table
     do_files = args.files
     delim = args.delimiter
-
+    if delim == "\\t":
+        delim = "\t"
     _, _, all_filenames = next(os.walk(working_dir))
     regex = re.compile(regex)
     matching_filenames = []
@@ -90,7 +91,7 @@ def diff_regex_headers():
                         this_row.append(val_pos["position"] + 1)
                         found = True
                 if not found:
-                    this_row.append(0)
+                    this_row.append(cs("0", "red"))
 
             columnar_rows.append(this_row)
         table = columnar(columnar_rows, columnar_headers)
