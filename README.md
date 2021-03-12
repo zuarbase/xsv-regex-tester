@@ -29,7 +29,7 @@ optional arguments:
 2. cd into the repo folder
 3. python -m venv pyenv
 4. source pyenv/bin/activate
-5. `pip install string-color`
+5. `pip install -r requirements.txt`
   
 ## Usage  
   
