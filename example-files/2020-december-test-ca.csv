@@ -1,0 +1,1 @@
+ship_date,vend_no,vend_name,Ship_Qty,Base_Cost,Extend_Base_Cost,bill_to_cust_no,bill_to_cust_name,bill_to_cust_zip,bill_to_cust_city,bill_to_cust_state,sold_to_cust_name,sales_terr,terr_name,ship_to_name,ship_to_city,ship_to_zip,ship_to_state,from_loc_no,vend_part_no,part_desc,synnex_po
