@@ -11,6 +11,7 @@ import argparse
 from argparse import RawTextHelpFormatter as rawtxt
 from stringcolor import cs, bold
 from columnar import columnar
+import chardet
 
 
 def head_n_1(filename, encoding, delim):
@@ -38,6 +39,7 @@ def diff_regex_headers():
     parser.add_argument("--json", "-j", action="store_true", help="print json object")
     parser.add_argument("--table", "-t", action="store_true", help="print table")
     parser.add_argument("--files", "-f", action="store_true", help="only show matching files")
+    parser.add_argument("--meta", "-m", action="store_true", help="show matching files including meta data")
     args = parser.parse_args()
     regex = args.regex
     encoding = args.encoding
@@ -46,6 +48,7 @@ def diff_regex_headers():
     do_table = args.table
     do_files = args.files
     delim = args.delimiter
+    do_meta = args.meta
     # check for tags
     if delim == "\\t":
         delim = "\t"
@@ -60,11 +63,22 @@ def diff_regex_headers():
     if len(matching_filenames) < 2:
         print(cs("Please use a pattern matching at least 2 files", "yellow", "red"))
         exit()
+    # show only files
     if do_files:
         for filename in matching_filenames:
             print(cs(filename, "Chartreuse"))
         exit()
-    headers = {}
+    if do_meta:
+        for filename in matching_filenames:
+            output = cs(filename, "Chartreuse")
+            rawdata = open(os.path.join(working_dir, filename), 'rb').read()
+            result = chardet.detect(rawdata)
+            charenc = result['encoding']
+            first_line = head_n_1(os.path.join(working_dir, filename), encoding, delim)
+            num_columns = len(first_line)
+            output = f"{output} - {charenc} - {num_columns} header columnns"
+            print(output)
+        exit()
     columns = []
     # get headers from file and build list of all headers
     for matched_file in matching_filenames:
@@ -86,7 +100,7 @@ def diff_regex_headers():
             colored_key = cs(key, "Cornsilk")
             this_row = [colored_key]
             for column in columns:
-                found =False
+                found = False
                 for val_pos in value:
                     if val_pos["value"] == column:
                         this_row.append(val_pos["position"] + 1)
@@ -95,7 +109,11 @@ def diff_regex_headers():
                     this_row.append(cs("0", "red"))
 
             columnar_rows.append(this_row)
-        table = columnar(columnar_rows, columnar_headers)
+        try:
+            table = columnar(columnar_rows, columnar_headers)
+        except Exception as e:
+            print(cs(str(e), "orange"))
+            exit()
         print(table)
     else:
         # basic output
