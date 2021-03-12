@@ -13,12 +13,12 @@ from stringcolor import cs, bold
 from columnar import columnar
 
 
-def head_n_1(filename, encoding):
-    """return the first line of filename"""
+def head_n_1(filename, encoding, delim):
+    """return the first line of filename as list"""
     with open(filename, mode="r", encoding=encoding) as f:
         first_line = f.readline()
-    return first_line.rstrip("\n")
-
+    without_newlines = first_line.rstrip("\n")
+    return without_newlines.split(delim)
 
 def diff_regex_headers():
     """
@@ -46,6 +46,7 @@ def diff_regex_headers():
     do_table = args.table
     do_files = args.files
     delim = args.delimiter
+    # check for tags
     if delim == "\\t":
         delim = "\t"
     _, _, all_filenames = next(os.walk(working_dir))
@@ -55,6 +56,7 @@ def diff_regex_headers():
     for filename in all_filenames:
         if regex.match(filename):
             matching_filenames.append(filename)
+    # check for enough files
     if len(matching_filenames) < 2:
         print(cs("Please use a pattern matching at least 2 files", "yellow", "red"))
         exit()
@@ -66,8 +68,7 @@ def diff_regex_headers():
     columns = []
     # get headers from file and build list of all headers
     for matched_file in matching_filenames:
-        first_line = head_n_1(os.path.join(working_dir, matched_file), encoding)
-        first_line = first_line.split(delim)
+        first_line = head_n_1(os.path.join(working_dir, matched_file), encoding, delim)
         header_dict = [{"value": x, "position": first_line.index(x)} for x in first_line]
         for header in first_line:
             if header not in columns:
@@ -100,8 +101,7 @@ def diff_regex_headers():
         # basic output
         for matched_file in matching_filenames:
             print(cs(matched_file, "yellow"))
-            first_line = head_n_1(os.path.join(working_dir, matched_file), encoding)
-            first_line = first_line.split(delim)
+            first_line = head_n_1(os.path.join(working_dir, matched_file), encoding, delim)
             print(first_line)
             # print missing
             missing = ""
