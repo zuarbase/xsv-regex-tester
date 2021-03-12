@@ -79,6 +79,7 @@ def diff_regex_headers():
             output = f"{output} - {charenc} - {num_columns} header columnns"
             print(output)
         exit()
+    headers = {}
     columns = []
     # get headers from file and build list of all headers
     for matched_file in matching_filenames:
