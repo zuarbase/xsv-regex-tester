@@ -54,6 +54,9 @@ def diff_regex_headers():
     for filename in all_filenames:
         if regex.match(filename):
             matching_filenames.append(filename)
+    if len(matching_filenames) < 2:
+        print(cs("Please use a pattern matching at least 2 files", "yellow", "red"))
+        exit()
     if do_files:
         for filename in matching_filenames:
             print(cs(filename, "Chartreuse"))
