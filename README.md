@@ -34,7 +34,7 @@ optional arguments:
 ## Usage  
   
 _Show help and exit_   
-`./regex-tester.py -h`  
+`$ ./regex-tester.py -h`  
   
 _Show matching files using working dir `example-files/`_   
 `$ ./regex-tester.py ".+clean.csv" -w example-files -f`  
@@ -46,10 +46,10 @@ _Use a different delimiter_
 `$ ./regex-tester.py ".+clean.csv" -w example-files -d "|"`  
   
 _Show a table with header names and positions_  
-`./regex-tester.py ".+clean.csv" -w example-files -d "|" -t`  
+`$ ./regex-tester.py ".+clean.csv" -w example-files -d "|" -t`  
   
 _Output a json object and pipe into jq_  
-`./regex-tester.py ".+clean.csv" -w example-files -d "|" -j`  
+`$ ./regex-tester.py ".+clean.csv" -w example-files -d "|" -j | jq`  
   
 _Use a different delimiter_  
 `$ ./regex-tester.py ".+clean.csv" -w example-files -d "|"`  
