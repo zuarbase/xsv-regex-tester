@@ -21,6 +21,7 @@ optional arguments:
   --json, -j            print json object
   --table, -t           print table
   --files, -f           only show matching files
+  --meta, -m            show matching files including meta data
 ```
 
 ## Setup (python 3+) 
