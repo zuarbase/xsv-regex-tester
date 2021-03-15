@@ -50,6 +50,3 @@ _Show a table with header names and positions_
   
 _Output a json object and pipe into jq_  
 `$ ./regex-tester.py ".+clean.csv" -w example-files -d "|" -j | jq`  
-  
-_Use a different delimiter_  
-`$ ./regex-tester.py ".+clean.csv" -w example-files -d "|"`  
