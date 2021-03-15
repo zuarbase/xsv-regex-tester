@@ -38,7 +38,10 @@ _Show help and exit_
   
 _Show matching files using working dir `example-files/`_   
 `$ ./regex-tester.py ".+clean.csv" -w example-files -f`  
-
+  
+_Show matching files using working dir `example-files/` with meta info about file encoding and number of header columns_  
+`$ ./regex-tester.py ".+clean.csv" -w example-files -m`  
+  
 _Show header names and anything missing using utf-8-sig encoding_   
 `$ ./regex-tester.py ".+test-ca.csv" -e utf-8-sig -w example-files`  
 
